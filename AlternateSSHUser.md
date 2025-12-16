@@ -34,13 +34,13 @@ mkdir E:\sshkeys
 Generate a modern, secure ED25519 keypair.
 
 ```bash
-ssh-keygen -t ed25519 -C "suryansh.pandey@github" -f "E:\sshkeys\id_ed25519_me"
+ssh-keygen -t ed25519 -C "user.name@github" -f "E:\sshkeys\id_ed25519_alias"
 ```
 
 ### Generated Files
 
-- `E:\sshkeys\id_ed25519_me` → **Private Key**
-- `E:\sshkeys\id_ed25519_me.pub` → **Public Key**
+- `E:\sshkeys\id_ed25519_alias` → **Private Key**
+- `E:\sshkeys\id_ed25519_alias.pub` → **Public Key**
 
 When prompted for a passphrase:
 - Press **ENTER** to skip  
@@ -53,8 +53,8 @@ When prompted for a passphrase:
 Explicitly restrict access to the private key.
 
 ```bash
-icacls "E:\sshkeys\id_ed25519_me" /inheritance:r
-icacls "E:\sshkeys\id_ed25519_me" /grant:r "%USERDOMAIN%\%USERNAME%:(R)"
+icacls "E:\sshkeys\id_ed25519_alias" /inheritance:r
+icacls "E:\sshkeys\id_ed25519_alias" /grant:r "%USERDOMAIN%\%USERNAME%:(R)"
 ```
 
 > **Security Note:**  
@@ -73,10 +73,10 @@ C:\Users\<your-username>\.ssh\config
 Add the following host alias:
 
 ```ssh
-Host github.com-me
+Host github.com-alias
     HostName github.com
     User git
-    IdentityFile E:/sshkeys/id_ed25519_me
+    IdentityFile E:/sshkeys/id_ed25519_alias
     IdentitiesOnly yes
 ```
 
@@ -93,7 +93,7 @@ Host github.com-me
 Display the public key:
 
 ```bash
-cat E:\sshkeys\id_ed25519_me.pub
+cat E:\sshkeys\id_ed25519_alias.pub
 ```
 
 Copy the output and navigate to:
@@ -111,7 +111,7 @@ Copy the output and navigate to:
 Test the configuration explicitly using the host alias:
 
 ```bash
-ssh -T git@github.com-me
+ssh -T git@github.com-alias
 ```
 
 ### Expected Output
@@ -129,17 +129,17 @@ If this succeeds, the SSH pipeline is operational.
 ### Clone a Repository
 
 ```bash
-git clone git@github.com-me:<user>/<repo>.git
+git clone git@github.com-alias:<user>/<repo>.git
 ```
 
 ### Update an Existing Repository
 
 ```bash
-git remote set-url origin git@github.com-me:<user>/<repo>.git
+git remote set-url origin git@github.com-alias:<user>/<repo>.git
 ```
 
 > **Best Practice:**  
-> Always use the alias (`github.com-me`) to guarantee the correct identity is used.
+> Always use the alias (`github.com-alias`) to guarantee the correct identity is used.
 
 ---
 
